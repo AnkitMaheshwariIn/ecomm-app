@@ -42,5 +42,18 @@
     "categories": "कैटेगरी",
     "cart": "कार्ट",
     "profile": "प्रोफाइल"
+  },
+  "home": {
+    "title": "शॉपईज़",
+    "categories": "श्रेणियां",
+    "featuredProducts": "विशेष उत्पाद",
+    "newArrivals": "नए आगमन",
+    "viewAll": "सभी देखें",
+    "addToCart": "कार्ट में जोड़ें",
+    "summerSale": "गर्मियों की बिक्री",
+    "upTo": "तक",
+    "off": "छूट",
+    "newArrivalsPromo": "नए आगमन",
+    "checkOutLatest": "नवीनतम उत्पादों को देखें"
   }
 }

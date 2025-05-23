@@ -4,6 +4,8 @@ import { CategoryService } from '../../services/category.service';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
 import { LogoutService } from '../../services/logout.service';
+import { LanguageService } from '../../services/language.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 import { Observable } from 'rxjs';
 import { Product } from '../../models/product.model';
 import { Category } from '../../models/category.model';
@@ -22,7 +24,7 @@ import { cartOutline, starSharp, personOutline, logOutOutline } from 'ionicons/i
   styleUrls: ['./home.page.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule, RouterLink, IonContent, IonHeader, IonToolbar, IonTitle, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonItem, IonLabel, IonButton, IonIcon, IonGrid, IonRow, IonCol, IonText, IonSkeletonText, IonImg, IonChip, IonButtons]
+  imports: [CommonModule, RouterLink, TranslatePipe, IonContent, IonHeader, IonToolbar, IonTitle, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonItem, IonLabel, IonButton, IonIcon, IonGrid, IonRow, IonCol, IonText, IonSkeletonText, IonImg, IonChip, IonButtons]
 })
 export class HomePage implements OnInit {
   featuredProducts$: Observable<Product[]>;
@@ -52,7 +54,8 @@ export class HomePage implements OnInit {
     private cartService: CartService,
     private authService: AuthService,
     private toastController: ToastController,
-    private logoutService: LogoutService
+    private logoutService: LogoutService,
+    private languageService: LanguageService
   ) {
     // Add Ionic icons
     addIcons({

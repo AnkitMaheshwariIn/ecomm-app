@@ -7,6 +7,8 @@
  * output CSS.
  * For more information on global stylesheets, visit the documentation:
  * https://ionicframework.com/docs/layout/global-stylesheets
+ *
+ * Premium UI Theme - Rich, elegant styling with violet and indigo accents
  */
 
 /* Core CSS required for Ionic components to work properly */
@@ -35,3 +37,130 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Premium UI Styling */
+
+// Headers and Toolbars
+ion-header {
+  ion-toolbar:first-of-type {
+    --background: var(--premium-gradient);
+    --border-width: 0;
+    box-shadow: var(--premium-shadow-md);
+    
+    ion-title {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    
+    ion-buttons ion-button {
+      --background-hover: rgba(255, 255, 255, 0.1);
+      --ripple-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+  
+  ion-toolbar:not(:first-of-type) {
+    --background: rgba(255, 255, 255, 0.95);
+    --border-color: rgba(124, 77, 255, 0.1);
+    box-shadow: var(--premium-shadow-sm);
+  }
+}
+
+// Cards
+ion-card {
+  border-radius: var(--premium-border-radius);
+  box-shadow: var(--premium-shadow-md);
+  border: var(--premium-border);
+  background: var(--premium-card-bg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:active {
+    transform: translateY(2px);
+    box-shadow: var(--premium-shadow-sm);
+  }
+  
+  ion-card-header {
+    border-bottom: 1px solid rgba(124, 77, 255, 0.1);
+  }
+  
+  ion-card-title {
+    font-weight: 600;
+    color: var(--ion-color-primary);
+  }
+}
+
+// Buttons
+ion-button {
+  --border-radius: 6px;
+  --box-shadow: var(--premium-shadow-sm);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  
+  &.button-solid {
+    --background: var(--premium-gradient);
+    --background-activated: var(--ion-color-primary-shade);
+    --background-focused: var(--ion-color-primary-shade);
+  }
+  
+  &.button-outline {
+    --border-color: var(--ion-color-primary);
+    --border-width: 2px;
+    --background-activated: rgba(69, 39, 160, 0.1);
+  }
+}
+
+// Lists
+ion-list {
+  background: transparent;
+  
+  ion-item {
+    --border-color: rgba(124, 77, 255, 0.1);
+    --background-activated: rgba(124, 77, 255, 0.05);
+    --background-focused: rgba(124, 77, 255, 0.05);
+    --background-hover: rgba(124, 77, 255, 0.03);
+    
+    &.selected {
+      --background: rgba(124, 77, 255, 0.08);
+      --background-hover: rgba(124, 77, 255, 0.12);
+      border-left: 3px solid var(--ion-color-primary);
+    }
+  }
+}
+
+// Searchbar
+ion-searchbar {
+  --background: rgba(255, 255, 255, 0.9);
+  --box-shadow: var(--premium-shadow-sm);
+  --border-radius: 8px;
+  --placeholder-color: var(--ion-color-medium);
+  --icon-color: var(--ion-color-primary);
+  --clear-button-color: var(--ion-color-medium);
+}
+
+// Tabs
+ion-tab-bar {
+  --background: rgba(255, 255, 255, 0.95);
+  border-top: var(--premium-border);
+  box-shadow: 0 -2px 10px rgba(69, 39, 160, 0.05);
+  
+  ion-tab-button {
+    --color: var(--ion-color-medium);
+    --color-selected: var(--ion-color-primary);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: var(--premium-gradient);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 0 0 3px 3px;
+    }
+    
+    &.tab-selected::before {
+      width: 40%;
+    }
+  }
+}

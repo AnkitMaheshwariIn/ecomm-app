@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>
-      ShopEase
+      {{ 'home.title' | translate }}
     </ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/tabs/cart">
@@ -29,8 +29,8 @@
         <div class="banner-slide">
           <img src="assets/banners/banner1.jpg" alt="Special Offer">
           <div class="banner-content">
-            <h2>Summer Sale</h2>
-            <p>Up to 50% off</p>
+            <h2>{{ 'home.summerSale' | translate }}</h2>
+            <p>{{ 'home.upTo' | translate }} 50% {{ 'home.off' | translate }}</p>
           </div>
         </div>
       </ion-slide>
@@ -38,8 +38,8 @@
         <div class="banner-slide">
           <img src="assets/banners/banner2.jpg" alt="New Arrivals">
           <div class="banner-content">
-            <h2>New Arrivals</h2>
-            <p>Check out the latest products</p>
+            <h2>{{ 'home.newArrivalsPromo' | translate }}</h2>
+            <p>{{ 'home.checkOutLatest' | translate }}</p>
           </div>
         </div>
       </ion-slide>
@@ -49,9 +49,9 @@
   <!-- Categories -->
   <div class="section">
     <div class="section-header">
-      <h2>Categories</h2>
-      <ion-button fill="clear" size="small" routerLink="/tabs/categories">
-        View All
+      <h2>{{ 'home.categories' | translate }}</h2>
+      <ion-button fill="solid" size="small" routerLink="/tabs/categories">
+        {{ 'home.viewAll' | translate }}
         <ion-icon name="chevron-forward" slot="end"></ion-icon>
       </ion-button>
     </div>
@@ -70,9 +70,9 @@
   <!-- Featured Products -->
   <div class="section">
     <div class="section-header">
-      <h2>Featured Products</h2>
-      <ion-button fill="clear" size="small" routerLink="/tabs/categories">
-        View All
+      <h2>{{ 'home.featuredProducts' | translate }}</h2>
+      <ion-button fill="solid" size="small" routerLink="/tabs/categories">
+        {{ 'home.viewAll' | translate }}
         <ion-icon name="chevron-forward" slot="end"></ion-icon>
       </ion-button>
     </div>
@@ -95,7 +95,7 @@
             <span>{{ product.ratings }} ({{ product.reviewCount || 0 }})</span>
           </div>
           <ion-button expand="block" fill="solid" color="primary" (click)="addToCart(product)">
-            Add to Cart
+            {{ 'home.addToCart' | translate }}
           </ion-button>
         </div>
       </div>
@@ -105,9 +105,9 @@
   <!-- New Arrivals -->
   <div class="section">
     <div class="section-header">
-      <h2>New Arrivals</h2>
-      <ion-button fill="clear" size="small" routerLink="/tabs/categories">
-        View All
+      <h2>{{ 'home.newArrivals' | translate }}</h2>
+      <ion-button fill="solid" size="small" routerLink="/tabs/categories">
+        {{ 'home.viewAll' | translate }}
         <ion-icon name="chevron-forward" slot="end"></ion-icon>
       </ion-button>
     </div>
@@ -130,7 +130,7 @@
             <span>{{ product.ratings }} ({{ product.reviewCount || 0 }})</span>
           </div>
           <ion-button expand="block" fill="solid" color="primary" (click)="addToCart(product)">
-            Add to Cart
+            {{ 'home.addToCart' | translate }}
           </ion-button>
         </div>
       </div>

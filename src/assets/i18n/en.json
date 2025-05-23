@@ -46,5 +46,18 @@
     "categories": "Categories",
     "cart": "Cart",
     "profile": "Profile"
+  },
+  "home": {
+    "title": "ShopEase",
+    "categories": "Categories",
+    "featuredProducts": "Featured Products",
+    "newArrivals": "New Arrivals",
+    "viewAll": "View All",
+    "addToCart": "Add to Cart",
+    "summerSale": "Summer Sale",
+    "upTo": "Up to",
+    "off": "off",
+    "newArrivalsPromo": "New Arrivals",
+    "checkOutLatest": "Check out the latest products"
   }
 }
