@@ -1,0 +1,140 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      ShopEase
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tabs/cart">
+        <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button routerLink="/tabs/profile">
+        <ion-icon name="person-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()" color="danger">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Search Bar -->
+  <div class="search-container">
+    <ion-searchbar placeholder="Search products" animated></ion-searchbar>
+  </div>
+
+  <!-- Banner Slider -->
+  <div class="banner-container">
+    <ion-slides pager="true" [options]="slideOpts" class="banner-slides">
+      <ion-slide>
+        <div class="banner-slide">
+          <img src="assets/banners/banner1.jpg" alt="Special Offer">
+          <div class="banner-content">
+            <h2>Summer Sale</h2>
+            <p>Up to 50% off</p>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="banner-slide">
+          <img src="assets/banners/banner2.jpg" alt="New Arrivals">
+          <div class="banner-content">
+            <h2>New Arrivals</h2>
+            <p>Check out the latest products</p>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- Categories -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Categories</h2>
+      <ion-button fill="clear" size="small" routerLink="/tabs/categories">
+        View All
+        <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+    <ion-slides [options]="categorySlideOpts" class="category-slides">
+      <ion-slide *ngFor="let category of categories$ | async">
+        <div class="category-item" [routerLink]="['/category', category.id]">
+          <div class="category-image">
+            <img [src]="category.imageUrl || 'assets/placeholder-image.jpg'" [alt]="category.name">
+          </div>
+          <p>{{ category.name }}</p>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- Featured Products -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Featured Products</h2>
+      <ion-button fill="clear" size="small" routerLink="/tabs/categories">
+        View All
+        <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" *ngFor="let product of featuredProducts$ | async">
+        <div class="product-image" [routerLink]="['/product', product.id]">
+          <img [src]="product.images[0] || 'assets/placeholder-product.jpg'" [alt]="product.name">
+          <div class="discount-badge" *ngIf="product.salePrice">
+            {{ ((product.price - product.salePrice) / product.price * 100) | number:'1.0-0' }}% OFF
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name" [routerLink]="['/product', product.id]">{{ product.name }}</h3>
+          <div class="product-price">
+            <span class="sale-price" *ngIf="product.salePrice">₹{{ product.salePrice }}</span>
+            <span class="original-price" [class.strikethrough]="product.salePrice">₹{{ product.price }}</span>
+          </div>
+          <div class="product-rating" *ngIf="product.ratings">
+            <ion-icon name="star" color="warning"></ion-icon>
+            <span>{{ product.ratings }} ({{ product.reviewCount || 0 }})</span>
+          </div>
+          <ion-button expand="block" fill="solid" color="primary" (click)="addToCart(product)">
+            Add to Cart
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Arrivals -->
+  <div class="section">
+    <div class="section-header">
+      <h2>New Arrivals</h2>
+      <ion-button fill="clear" size="small" routerLink="/tabs/categories">
+        View All
+        <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="product-grid">
+      <div class="product-card" *ngFor="let product of featuredProducts$ | async">
+        <div class="product-image" [routerLink]="['/product', product.id]">
+          <img [src]="product.images[0] || 'assets/placeholder-product.jpg'" [alt]="product.name">
+          <div class="discount-badge" *ngIf="product.salePrice">
+            {{ ((product.price - product.salePrice) / product.price * 100) | number:'1.0-0' }}% OFF
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name" [routerLink]="['/product', product.id]">{{ product.name }}</h3>
+          <div class="product-price">
+            <span class="sale-price" *ngIf="product.salePrice">₹{{ product.salePrice }}</span>
+            <span class="original-price" [class.strikethrough]="product.salePrice">₹{{ product.price }}</span>
+          </div>
+          <div class="product-rating" *ngIf="product.ratings">
+            <ion-icon name="star" color="warning"></ion-icon>
+            <span>{{ product.ratings }} ({{ product.reviewCount || 0 }})</span>
+          </div>
+          <ion-button expand="block" fill="solid" color="primary" (click)="addToCart(product)">
+            Add to Cart
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

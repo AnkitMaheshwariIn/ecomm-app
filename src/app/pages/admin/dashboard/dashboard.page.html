@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-title>
+      Dashboard
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+    
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <ion-icon name="cube-outline"></ion-icon>
+        </div>
+        <div class="stat-content">
+          <h2>{{ productCount$ | async }}</h2>
+          <p>Products</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">
+          <ion-icon name="list-outline"></ion-icon>
+        </div>
+        <div class="stat-content">
+          <h2>{{ categoryCount$ | async }}</h2>
+          <p>Categories</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">
+          <ion-icon name="cart-outline"></ion-icon>
+        </div>
+        <div class="stat-content">
+          <h2>0</h2>
+          <p>Orders</p>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">
+          <ion-icon name="people-outline"></ion-icon>
+        </div>
+        <div class="stat-content">
+          <h2>0</h2>
+          <p>Customers</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="action-buttons">
+        <ion-button expand="block" (click)="navigateToAddProduct()">
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          Add New Product
+        </ion-button>
+        
+        <ion-button expand="block" (click)="navigateToAddCategory()">
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          Add New Category
+        </ion-button>
+      </div>
+    </div>
+    
+    <!-- Recent Activity -->
+    <div class="recent-activity">
+      <h2>Recent Activity</h2>
+      <div class="empty-state">
+        <ion-icon name="time-outline"></ion-icon>
+        <p>No recent activity</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

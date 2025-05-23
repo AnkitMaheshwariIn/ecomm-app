@@ -1,0 +1,103 @@
+.profile-container {
+  padding: 24px 16px;
+}
+
+// User Info
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  
+  .user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 3px solid var(--ion-color-primary);
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  h2 {
+    margin: 0 0 4px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+  }
+  
+  p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: var(--ion-color-medium);
+  }
+  
+  .admin-badge {
+    margin-top: 4px;
+    
+    ion-badge {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+  }
+}
+
+// Admin Panel
+.admin-panel {
+  margin-bottom: 24px;
+  
+  ion-button {
+    --border-radius: 8px;
+    font-weight: 500;
+  }
+}
+
+// Menu List
+.menu-list {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  
+  ion-item {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 16px;
+    
+    ion-icon {
+      font-size: 20px;
+      margin-right: 16px;
+    }
+    
+    ion-label {
+      font-size: 16px;
+    }
+  }
+}
+
+// Logout Button
+.logout-button {
+  margin-bottom: 32px;
+  
+  ion-button {
+    --border-radius: 8px;
+    height: 48px;
+    font-weight: 500;
+  }
+}
+
+// App Version
+.app-version {
+  text-align: center;
+  
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--ion-color-medium);
+  }
+}

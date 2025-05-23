@@ -1,0 +1,67 @@
+.login-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 40px;
+  
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 16px 0 8px;
+    color: var(--ion-color-primary);
+  }
+  
+  p {
+    font-size: 16px;
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+.app-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.login-buttons {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 32px;
+  
+  ion-button {
+    margin-bottom: 16px;
+    height: 48px;
+    --border-radius: 8px;
+    font-weight: 500;
+  }
+}
+
+.google-btn {
+  --background: #ffffff;
+  --color: #4285F4;
+  --border-color: #dadce0;
+  --border-style: solid;
+  --border-width: 1px;
+  
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+.footer-text {
+  text-align: center;
+  
+  p {
+    font-size: 12px;
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}

@@ -1,0 +1,178 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-title>
+      Categories Management
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addCategory()">
+        <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="categories-container">
+    <!-- Categories List -->
+    <div class="categories-list">
+      <div class="list-header">
+        <h2>Main Categories</h2>
+        <ion-button fill="clear" size="small" (click)="addCategory()">
+          <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+      
+      <ion-list lines="none">
+        <ion-item-sliding *ngFor="let category of categories$ | async">
+          <ion-item [class.selected]="selectedCategory?.id === category.id" (click)="selectCategory(category)">
+            <ion-thumbnail slot="start" *ngIf="category.imageUrl">
+              <img [src]="category.imageUrl" [alt]="category.name">
+            </ion-thumbnail>
+            <ion-icon name="folder-outline" slot="start" *ngIf="!category.imageUrl"></ion-icon>
+            <ion-label>
+              <h3>{{ category.name }}</h3>
+              <p *ngIf="category.description">{{ category.description }}</p>
+            </ion-label>
+            <ion-icon name="chevron-forward" slot="end" *ngIf="selectedCategory?.id === category.id"></ion-icon>
+          </ion-item>
+          
+          <ion-item-options side="end">
+            <ion-item-option color="primary" (click)="editCategory(category)">
+              <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="danger" (click)="deleteCategory(category)">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+        
+        <ion-item *ngIf="(categories$ | async)?.length === 0" lines="none" class="empty-list">
+          <ion-label class="ion-text-center">
+            <ion-icon name="folder-outline"></ion-icon>
+            <p>No categories found</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    
+    <!-- Subcategories List -->
+    <div class="subcategories-list" *ngIf="selectedCategory">
+      <div class="list-header">
+        <h2>{{ selectedCategory.name }} Subcategories</h2>
+        <ion-button fill="clear" size="small" (click)="addCategory()">
+          <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+      
+      <ion-list lines="none">
+        <ion-item-sliding *ngFor="let subCategory of subCategories">
+          <ion-item>
+            <ion-thumbnail slot="start" *ngIf="subCategory.imageUrl">
+              <img [src]="subCategory.imageUrl" [alt]="subCategory.name">
+            </ion-thumbnail>
+            <ion-icon name="folder-outline" slot="start" *ngIf="!subCategory.imageUrl"></ion-icon>
+            <ion-label>
+              <h3>{{ subCategory.name }}</h3>
+              <p *ngIf="subCategory.description">{{ subCategory.description }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item-options side="end">
+            <ion-item-option color="primary" (click)="editCategory(subCategory)">
+              <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="danger" (click)="deleteCategory(subCategory)">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+        
+        <ion-item *ngIf="subCategories.length === 0" lines="none" class="empty-list">
+          <ion-label class="ion-text-center">
+            <ion-icon name="folder-outline"></ion-icon>
+            <p>No subcategories found</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    
+    <!-- Category Form -->
+    <div class="category-form" *ngIf="isEditMode || categoryForm.dirty">
+      <div class="form-header">
+        <h2>{{ isEditMode ? 'Edit Category' : 'Add Category' }}</h2>
+        <ion-button fill="clear" size="small" color="danger" (click)="cancelEdit()">
+          <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+      
+      <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+        <ion-item>
+          <ion-label position="stacked">Category Name <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input formControlName="name" type="text" placeholder="Enter category name"></ion-input>
+          <ion-note slot="error" *ngIf="categoryForm.get('name')?.touched && categoryForm.get('name')?.hasError('required')">
+            Name is required
+          </ion-note>
+          <ion-note slot="error" *ngIf="categoryForm.get('name')?.touched && categoryForm.get('name')?.hasError('minlength')">
+            Name must be at least 3 characters
+          </ion-note>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Description</ion-label>
+          <ion-textarea formControlName="description" rows="3" placeholder="Enter category description (optional)"></ion-textarea>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Parent Category</ion-label>
+          <ion-select formControlName="parentId" placeholder="Select parent category (optional)">
+            <ion-select-option [value]="''">None (Main Category)</ion-select-option>
+            <ion-select-option [value]="category.id" *ngFor="let category of categories$ | async">
+              {{ category.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        
+        <!-- Category Image -->
+        <div class="image-section">
+          <h3>Category Image</h3>
+          
+          <div class="image-container" *ngIf="selectedImage">
+            <img [src]="selectedImage" alt="Category Image">
+            <ion-button fill="clear" color="danger" class="delete-button" (click)="removeImage()">
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-button>
+          </div>
+          
+          <div class="add-image-button" *ngIf="!selectedImage" (click)="selectImage()">
+            <ion-icon name="camera-outline"></ion-icon>
+            <p>Add Image</p>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <ion-button expand="block" type="submit" [disabled]="categoryForm.invalid">
+            {{ isEditMode ? 'Update Category' : 'Add Category' }}
+          </ion-button>
+          <ion-button expand="block" fill="outline" color="medium" type="button" (click)="cancelEdit()">
+            Cancel
+          </ion-button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- No Selection State -->
+    <div class="no-selection" *ngIf="!selectedCategory && !isEditMode && !categoryForm.dirty">
+      <div class="empty-state">
+        <ion-icon name="folder-outline"></ion-icon>
+        <p>Select a category to view subcategories or add a new category</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Floating Action Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!isEditMode && !categoryForm.dirty">
+    <ion-fab-button (click)="addCategory()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

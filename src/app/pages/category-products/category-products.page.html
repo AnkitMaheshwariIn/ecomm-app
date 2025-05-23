@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/categories"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="category$ | async as category">{{ category.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tabs/cart">
+        <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar placeholder="Search in this category" animated></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="category-container">
+    <!-- Subcategories -->
+    <div class="subcategories-section" *ngIf="((subCategories$ | async) || []).length > 0">
+      <ion-slides [options]="{ slidesPerView: 3.5, spaceBetween: 10, freeMode: true }">
+        <ion-slide *ngFor="let subCategory of subCategories$ | async" [routerLink]="['/category', subCategory.id]">
+          <div class="subcategory-item">
+            <div class="subcategory-image">
+              <img [src]="subCategory.imageUrl || 'assets/placeholder-image.jpg'" [alt]="subCategory.name">
+            </div>
+            <p>{{ subCategory.name }}</p>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+    
+    <!-- Filters -->
+    <div class="filters-section">
+      <div class="filter-button">
+        <ion-icon name="options-outline"></ion-icon>
+        <span>Filter</span>
+      </div>
+      <div class="filter-button">
+        <ion-icon name="swap-vertical-outline"></ion-icon>
+        <span>Sort</span>
+      </div>
+    </div>
+    
+    <!-- Products Grid -->
+    <div class="products-grid">
+      <ng-container *ngIf="products$ | async as products">
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="products.length === 0">
+          <ion-icon name="cube-outline"></ion-icon>
+          <h2>No Products Found</h2>
+          <p>There are no products in this category yet.</p>
+          <ion-button routerLink="/tabs/home">
+            Continue Shopping
+          </ion-button>
+        </div>
+        
+        <!-- Products -->
+        <div class="product-card" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+          <div class="product-image">
+            <img [src]="product.images[0] || 'assets/placeholder-product.jpg'" [alt]="product.name">
+            <div class="discount-badge" *ngIf="product.salePrice">
+              {{ getDiscountPercentage(product) }}% OFF
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <div class="product-price">
+              <span class="sale-price" *ngIf="product.salePrice">₹{{ product.salePrice }}</span>
+              <span class="original-price" [class.strikethrough]="product.salePrice">₹{{ product.price }}</span>
+            </div>
+            <div class="product-rating" *ngIf="product.ratings">
+              <ion-icon name="star" color="warning"></ion-icon>
+              <span>{{ product.ratings }} ({{ product.reviewCount || 0 }})</span>
+            </div>
+            <ion-button expand="block" fill="solid" color="primary" (click)="addToCart(product); $event.stopPropagation()">
+              Add to Cart
+            </ion-button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,176 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin/products"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ isEditMode ? 'Edit Product' : 'Add Product' }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveProduct()">
+        <ion-icon name="save-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="productForm">
+    <div class="form-container">
+      <!-- Basic Information -->
+      <div class="form-section">
+        <h2>Basic Information</h2>
+        
+        <ion-item>
+          <ion-label position="stacked">Product Name <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input formControlName="name" type="text" placeholder="Enter product name"></ion-input>
+          <ion-note slot="error" *ngIf="productForm.get('name')?.touched && productForm.get('name')?.hasError('required')">
+            Name is required
+          </ion-note>
+          <ion-note slot="error" *ngIf="productForm.get('name')?.touched && productForm.get('name')?.hasError('minlength')">
+            Name must be at least 3 characters
+          </ion-note>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Description <ion-text color="danger">*</ion-text></ion-label>
+          <ion-textarea formControlName="description" rows="4" placeholder="Enter product description"></ion-textarea>
+          <ion-note slot="error" *ngIf="productForm.get('description')?.touched && productForm.get('description')?.hasError('required')">
+            Description is required
+          </ion-note>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Regular Price (₹) <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input formControlName="price" type="number" min="0" placeholder="0.00"></ion-input>
+          <ion-note slot="error" *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('required')">
+            Price is required
+          </ion-note>
+          <ion-note slot="error" *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('min')">
+            Price must be greater than or equal to 0
+          </ion-note>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Sale Price (₹)</ion-label>
+          <ion-input formControlName="salePrice" type="number" min="0" placeholder="Optional"></ion-input>
+          <ion-note slot="error" *ngIf="productForm.get('salePrice')?.touched && productForm.get('salePrice')?.hasError('min')">
+            Sale price must be greater than or equal to 0
+          </ion-note>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Stock Quantity <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input formControlName="stock" type="number" min="0" placeholder="0"></ion-input>
+          <ion-note slot="error" *ngIf="productForm.get('stock')?.touched && productForm.get('stock')?.hasError('required')">
+            Stock quantity is required
+          </ion-note>
+          <ion-note slot="error" *ngIf="productForm.get('stock')?.touched && productForm.get('stock')?.hasError('min')">
+            Stock quantity must be greater than or equal to 0
+          </ion-note>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>Featured Product</ion-label>
+          <ion-toggle formControlName="featured"></ion-toggle>
+        </ion-item>
+      </div>
+      
+      <!-- Category Information -->
+      <div class="form-section">
+        <h2>Category Information</h2>
+        
+        <ion-item>
+          <ion-label position="stacked">Category <ion-text color="danger">*</ion-text></ion-label>
+          <ion-select formControlName="categoryId" placeholder="Select category" (ionChange)="onCategoryChange($event.detail.value)">
+            <ion-select-option [value]="category.id" *ngFor="let category of categories$ | async">
+              {{ category.name }}
+            </ion-select-option>
+          </ion-select>
+          <ion-note slot="error" *ngIf="productForm.get('categoryId')?.touched && productForm.get('categoryId')?.hasError('required')">
+            Category is required
+          </ion-note>
+        </ion-item>
+        
+        <ion-item *ngIf="subCategories$ | async as subCategories">
+          <ion-label position="stacked">Subcategory</ion-label>
+          <ion-select formControlName="subCategoryId" placeholder="Select subcategory (optional)">
+            <ion-select-option [value]="subCategory.id" *ngFor="let subCategory of subCategories">
+              {{ subCategory.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      
+      <!-- Product Attributes -->
+      <div class="form-section">
+        <div class="section-header">
+          <h2>Product Attributes</h2>
+          <ion-button fill="clear" size="small" (click)="addAttribute()">
+            <ion-icon name="add" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+        
+        <div formArrayName="attributes">
+          <div class="attribute-row" *ngFor="let attribute of attributes.controls; let i = index" [formGroupName]="i">
+            <ion-item>
+              <ion-label position="stacked">Attribute Name</ion-label>
+              <ion-input formControlName="key" placeholder="e.g. Color, Size, Material"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label position="stacked">Value</ion-label>
+              <ion-input formControlName="value" placeholder="e.g. Red, XL, Cotton"></ion-input>
+            </ion-item>
+            
+            <ion-button fill="clear" color="danger" (click)="removeAttribute(i)">
+              <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+          
+          <div class="empty-attributes" *ngIf="attributes.length === 0">
+            <p>No attributes added yet. Click the + button to add attributes like color, size, material, etc.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Product Images -->
+      <div class="form-section">
+        <div class="section-header">
+          <h2>Product Images</h2>
+          <ion-button fill="clear" size="small" (click)="selectImages()">
+            <ion-icon name="add" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+        
+        <div class="images-container">
+          <div class="image-preview" *ngFor="let image of selectedImages; let i = index">
+            <img [src]="image" alt="Product Image">
+            <ion-button fill="clear" color="danger" class="delete-button" (click)="removeImage(i)">
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-button>
+          </div>
+          
+          <div class="add-image-button" *ngIf="selectedImages.length === 0" (click)="selectImages()">
+            <ion-icon name="camera-outline"></ion-icon>
+            <p>Add Images</p>
+          </div>
+        </div>
+        
+        <div class="image-instructions" *ngIf="selectedImages.length === 0">
+          <p>Add at least one product image. Images will be automatically optimized.</p>
+        </div>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="form-actions">
+        <ion-button expand="block" color="primary" (click)="saveProduct()">
+          {{ isEditMode ? 'Update Product' : 'Create Product' }}
+        </ion-button>
+        <ion-button expand="block" fill="outline" color="medium" (click)="confirmCancel()">
+          Cancel
+        </ion-button>
+      </div>
+    </div>
+  </form>
+</ion-content>

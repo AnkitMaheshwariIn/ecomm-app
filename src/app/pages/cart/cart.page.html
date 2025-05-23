@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Shopping Cart
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="clearCart()" *ngIf="(cartItems$ | async)?.length">
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="(cartItems$ | async) as cartItems">
+    <!-- Empty Cart State -->
+    <div class="empty-cart" *ngIf="cartItems.length === 0">
+      <div class="empty-cart-content">
+        <ion-icon name="cart-outline"></ion-icon>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added anything to your cart yet.</p>
+        <ion-button expand="block" routerLink="/tabs/home">
+          Start Shopping
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Cart Items -->
+    <div class="cart-container" *ngIf="cartItems.length > 0">
+      <ion-list>
+        <ion-item-sliding *ngFor="let item of cartItems">
+          <ion-item lines="full">
+            <ion-thumbnail slot="start">
+              <img [src]="item.product.images[0] || 'assets/placeholder-product.jpg'" [alt]="item.product.name">
+            </ion-thumbnail>
+            <ion-label>
+              <h3>{{ item.product.name }}</h3>
+              <p *ngIf="item.product.salePrice">
+                <span class="sale-price">₹{{ item.product.salePrice }}</span>
+                <span class="original-price">₹{{ item.product.price }}</span>
+              </p>
+              <p *ngIf="!item.product.salePrice">₹{{ item.product.price }}</p>
+            </ion-label>
+            <div class="quantity-selector">
+              <ion-button fill="clear" size="small" (click)="updateQuantity(item.product.id, item.quantity - 1)" [disabled]="item.quantity <= 1">
+                <ion-icon name="remove-circle-outline"></ion-icon>
+              </ion-button>
+              <span class="quantity">{{ item.quantity }}</span>
+              <ion-button fill="clear" size="small" (click)="updateQuantity(item.product.id, item.quantity + 1)">
+                <ion-icon name="add-circle-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="removeItem(item.product.id)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>₹{{ calculateTotal() }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>Free</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span>₹{{ calculateTotal() }}</span>
+        </div>
+      </div>
+
+      <!-- Checkout Button -->
+      <div class="checkout-button">
+        <ion-button expand="block" (click)="checkout()">
+          Proceed to Checkout
+        </ion-button>
+      </div>
+    </div>
+  </ng-container>
+</ion-content>
