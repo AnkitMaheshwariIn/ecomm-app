@@ -3,39 +3,45 @@
 
 // Banner Section Styling
 .banner-section {
-  margin-top: 12px;
-  margin-bottom: 16px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   max-width: 100%;
-  padding: 0 8px;
+  padding: 0 10px;
 }
 
-// Mobile/Tablet Banner Styling
-.mobile-only {
-  display: block;
+// Mobile Banner Styling
+.mobile-banner-container {
+  margin-bottom: 10px;
   
+  .banner-card {
+    margin-bottom: 10px; // Reduced space between cards
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--premium-shadow-md);
+  }
+  
+  .banner-card:last-child {
+    margin-bottom: 0; // Remove margin from last card
+  }
+  
+  // Hide on desktop
   @media (min-width: 992px) {
-    display: none; // Hide on larger screens
-  }
-  
-  .banner-slides {
-    height: 180px;
-    
-    // Responsive height adjustments for tablets
-    @media (min-width: 768px) and (max-width: 991px) {
-      height: 220px;
-    }
+    display: none;
   }
 }
 
-// Desktop Banner Grid Styling
-.desktop-only {
+// Desktop Banner Styling
+.desktop-banner-container {
   display: none; // Hidden by default on mobile
+  padding: 0;
   
   @media (min-width: 992px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr; // Two equal columns
-    gap: 10px;
-    height: auto; // Let height be determined by content
+    display: block;
+    margin-bottom: 16px;
+    
+    ion-row {
+      --ion-grid-column-padding: 10px;
+    }
   }
 }
 

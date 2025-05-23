@@ -29,9 +29,31 @@ import { cartOutline, starSharp, personOutline, logOutOutline } from 'ionicons/i
 export class HomePage implements OnInit {
   featuredProducts$: Observable<Product[]>;
   categories$: Observable<Category[]>;
+  // Banner slide options with responsive slidesPerView
+  bannerSlideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    autoplay: true,
+    loop: true,
+    spaceBetween: 20,
+    slidesPerView: 1, // Default to 1 slide for mobile
+    breakpoints: {
+      // When window width is >= 992px (desktop)
+      992: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      }
+    }
+  };
+  
+  // Product slide options
   slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    autoplay: true,
+    loop: true,
+    spaceBetween: 20,
     slidesPerView: 2.2,
-    spaceBetween: 10,
     freeMode: true,
     coverflowEffect: {
       rotate: 50,
