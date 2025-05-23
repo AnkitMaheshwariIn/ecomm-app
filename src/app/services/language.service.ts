@@ -51,6 +51,32 @@ export class LanguageService {
     // Update current language
     this.currentLangSubject.next(lang);
   }
+  
+  /**
+   * Get a translation by key
+   * @param key The translation key
+   * @returns The translated string or undefined if not found
+   */
+  getTranslation(key: string): string | undefined {
+    const lang = this.currentLangSubject.value;
+    if (!this.translations[lang]) {
+      return undefined;
+    }
+    
+    // Handle nested keys (e.g. 'categories.fruitsVegetables')
+    const keys = key.split('.');
+    let result = this.translations[lang];
+    
+    for (const k of keys) {
+      if (result && typeof result === 'object' && k in result) {
+        result = result[k];
+      } else {
+        return undefined;
+      }
+    }
+    
+    return typeof result === 'string' ? result : undefined;
+  }
 
   /**
    * Get translation for a key

@@ -5,6 +5,7 @@ import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
 import { LogoutService } from '../../services/logout.service';
 import { LanguageService } from '../../services/language.service';
+import { StoreConfigService } from '../../services/store-config.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { Observable } from 'rxjs';
 import { Product } from '../../models/product.model';
@@ -16,7 +17,9 @@ import { IonContent, IonHeader, IonToolbar, IonTitle, IonCard, IonCardContent, I
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicSlides } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { cartOutline, starSharp, personOutline, logOutOutline } from 'ionicons/icons';
+import { cartOutline, starSharp, personOutline, logOutOutline, chevronForward } from 'ionicons/icons';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { StoreType } from '../../../assets/data/categories';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +32,10 @@ import { cartOutline, starSharp, personOutline, logOutOutline } from 'ionicons/i
 export class HomePage implements OnInit {
   featuredProducts$: Observable<Product[]>;
   categories$: Observable<Category[]>;
+  mainCategories$: Observable<Category[]>;
+  storeType: StoreType = StoreType.KIRANA;
+  availableStoreTypes: {type: StoreType, label: string}[] = [];
+  
   // Banner slide options with responsive slidesPerView
   bannerSlideOpts = {
     initialSlide: 0,
@@ -63,12 +70,6 @@ export class HomePage implements OnInit {
       slideShadows: true,
     }
   };
-  
-  categorySlideOpts = {
-    slidesPerView: 3.5,
-    spaceBetween: 10,
-    freeMode: true
-  };
 
   constructor(
     private productService: ProductService,
@@ -77,17 +78,59 @@ export class HomePage implements OnInit {
     private authService: AuthService,
     private toastController: ToastController,
     private logoutService: LogoutService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private storeConfigService: StoreConfigService,
+    private sanitizer: DomSanitizer
   ) {
     // Add Ionic icons
     addIcons({
       'cart-outline': cartOutline,
       'star': starSharp,
       'person-outline': personOutline,
-      'log-out-outline': logOutOutline
+      'log-out-outline': logOutOutline,
+      'chevron-forward': chevronForward
     });
+    
+    // Get available store types
+    this.availableStoreTypes = this.categoryService.getAvailableStoreTypes();
+    
+    // Subscribe to the current store type
+    this.storeConfigService.storeType$.subscribe(type => {
+      this.storeType = type;
+    });
+    
+    // Get products and categories
     this.featuredProducts$ = this.productService.getFeaturedProducts();
-    this.categories$ = this.categoryService.getMainCategories();
+    this.categories$ = this.categoryService.getCategories();
+    this.mainCategories$ = this.categoryService.getMainCategories();
+  }
+  
+  /**
+   * Safely convert SVG data URL to HTML content
+   */
+  getSafeHtml(svgUrl: string | undefined): SafeHtml {
+    if (!svgUrl) return this.sanitizer.bypassSecurityTrustHtml('');
+    
+    // If it's a data URL, extract the SVG content
+    if (svgUrl.startsWith('data:image/svg+xml')) {
+      try {
+        const svgContent = decodeURIComponent(svgUrl.split('utf8,')[1]);
+        return this.sanitizer.bypassSecurityTrustHtml(svgContent);
+      } catch (e) {
+        console.error('Error parsing SVG:', e);
+        return this.sanitizer.bypassSecurityTrustHtml('');
+      }
+    }
+    
+    // If it's a regular URL, return an img tag
+    return this.sanitizer.bypassSecurityTrustHtml(`<img src="${svgUrl}" alt="Category" />`);
+  }
+  
+  /**
+   * Change the store type
+   */
+  changeStoreType(type: StoreType): void {
+    this.categoryService.setStoreType(type);
   }
 
   ngOnInit() {

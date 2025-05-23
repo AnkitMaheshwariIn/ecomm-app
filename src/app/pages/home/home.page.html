@@ -87,16 +87,18 @@
         <ion-icon name="chevron-forward" slot="end"></ion-icon>
       </ion-button>
     </div>
-    <ion-slides [options]="categorySlideOpts" class="category-slides">
-      <ion-slide *ngFor="let category of categories$ | async">
-        <div class="category-item" [routerLink]="['/category', category.id]">
-          <div class="category-image">
-            <img [src]="category.imageUrl || 'assets/svg/placeholder-category.svg'" [alt]="category.name">
-          </div>
-          <p>{{ category.name }}</p>
+    
+    <!-- This is a Kirana store specific repository -->
+    
+    <!-- Category Horizontal Scrollable Layout -->
+    <div class="categories-container">
+      <div class="categories-scroll">
+        <div class="category-card" *ngFor="let category of (mainCategories$ | async)" [routerLink]="['/category', category.id]">
+          <div class="category-icon" [innerHTML]="getSafeHtml(category.imageUrl)"></div>
+          <div class="category-name">{{ category.name }}</div>
         </div>
-      </ion-slide>
-    </ion-slides>
+      </div>
+    </div>
   </div>
 
   <!-- Featured Products -->
