@@ -1,6 +1,6 @@
 <ion-tabs>
   <!-- Logout Button (Fixed Position) -->
-  <ion-button *ngIf="user$ | async" (click)="logout()" fill="clear" class="logout-button">
+  <ion-button *ngIf="user$ | async" (click)="showLogoutConfirmation()" fill="clear" class="logout-button">
     <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
   </ion-button>
   
