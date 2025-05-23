@@ -69,6 +69,8 @@ ShopEase is a modern, feature-rich e-commerce mobile application built with Ioni
 - **Form Handling**: Angular Reactive Forms
 - **Routing**: Angular Router with lazy loading
 - **Styling**: SCSS with Ionic theming
+- **Internationalization**: Custom i18n implementation with JSON translation files
+- **Theme**: Monochrome color palette with black, white, and gray tones
 
 ### Architecture
 
@@ -183,9 +185,21 @@ The app uses Ionic's theming system. You can customize the colors, fonts, and ot
 
 The app is designed to be easily extended with payment gateways. Implement a payment service in the `services` directory and integrate it with the checkout process.
 
-### Localization
+### Internationalization (i18n)
 
-To add multi-language support, implement Angular's internationalization (i18n) features.
+The application supports multiple languages with a built-in translation system:
+
+- **Supported Languages**: English and Hindi
+- **Translation Files**: Located in `src/assets/i18n/` as JSON files
+- **Language Service**: Manages language switching and translation loading
+- **Language Toggle**: UI component for users to switch between languages
+- **Persistent Preferences**: User language preference is saved between sessions
+
+To add a new language:
+1. Create a new JSON file in `src/assets/i18n/` (e.g., `fr.json`)
+2. Copy the structure from an existing language file
+3. Translate all the key values
+4. Update the `LanguageService` to include the new language option
 
 ## Best Practices
 
@@ -194,6 +208,9 @@ To add multi-language support, implement Angular's internationalization (i18n) f
 - **Security**: Implement proper authentication and authorization checks
 - **Testing**: Write unit and integration tests for components and services
 - **Documentation**: Document code and maintain up-to-date README
+- **UI Consistency**: Maintain consistent UI patterns across the application
+- **Internationalization**: Keep all user-facing text in translation files
+- **Service Abstraction**: Use services for shared functionality (e.g., LogoutService)
 
 ## License
 
