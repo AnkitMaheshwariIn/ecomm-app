@@ -1,11 +1,41 @@
 /* Tabs page styles */
 ion-tab-bar {
-  --background: var(--ion-color-primary);
-  --color: var(--ion-color-light);
+  --background: var(--ion-tab-bar-background);
+  --color: var(--ion-tab-bar-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 ion-tab-button {
-  --color-selected: var(--ion-color-light);
+  --color-selected: var(--ion-tab-bar-color-selected);
+  --padding-top: 6px;
+  --padding-bottom: 6px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--ion-tab-bar-color-selected);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  &.tab-selected::before {
+    width: 40%;
+  }
+  
+  ion-label {
+    font-size: 12px;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: visible;
+  }
+  
+  ion-icon {
+    font-size: 22px;
+  }
 }
 
 .cart-badge {

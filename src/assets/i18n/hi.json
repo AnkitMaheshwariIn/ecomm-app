@@ -14,10 +14,11 @@
     "login": "लॉगिन",
     "signup": "साइन अप",
     "forgotPassword": "पासवर्ड भूल गए",
-    "logoutConfirmation": "क्या आप वाकई लॉगआउट करना चाहते हैं?",
+    "logoutConfirmation": "क्या आप लॉगआउट करना चाहते हैं?",
+    "logoutSuccess": "आप लॉगआउट हो चुके हैं",
+    "logoutError": "लॉगआउट में त्रुटि। कृपया पुनः प्रयास करें।",
     "loginSuccess": "लॉगिन सफल",
-    "loginFailed": "लॉगिन विफल",
-    "logoutSuccess": "लॉगआउट सफल"
+    "loginFailed": "लॉगिन विफल"
   },
   "login": {
     "tagline": "आपका एक-स्टॉप शॉपिंग डेस्टिनेशन",

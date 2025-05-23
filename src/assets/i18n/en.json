@@ -10,14 +10,19 @@
     "close": "Close"
   },
   "auth": {
-    "logout": "Logout",
     "login": "Login",
-    "signup": "Sign Up",
-    "forgotPassword": "Forgot Password",
+    "logout": "Logout",
     "logoutConfirmation": "Are you sure you want to logout?",
-    "loginSuccess": "Login successful",
-    "loginFailed": "Login failed",
-    "logoutSuccess": "Logout successful"
+    "logoutSuccess": "You have been logged out",
+    "logoutError": "Error logging out. Please try again.",
+    "signInWithGoogle": "Sign in with Google",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "hasAccount": "Already have an account?",
+    "signIn": "Sign In"
   },
   "login": {
     "tagline": "Your one-stop shopping destination",

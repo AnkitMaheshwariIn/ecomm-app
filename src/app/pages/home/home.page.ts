@@ -3,6 +3,7 @@ import { ProductService } from '../../services/product.service';
 import { CategoryService } from '../../services/category.service';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
+import { LogoutService } from '../../services/logout.service';
 import { Observable } from 'rxjs';
 import { Product } from '../../models/product.model';
 import { Category } from '../../models/category.model';
@@ -50,7 +51,8 @@ export class HomePage implements OnInit {
     private categoryService: CategoryService,
     private cartService: CartService,
     private authService: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private logoutService: LogoutService
   ) {
     // Add Ionic icons
     addIcons({
@@ -78,13 +80,6 @@ export class HomePage implements OnInit {
   }
 
   async logout() {
-    await this.authService.signOut();
-    const toast = await this.toastController.create({
-      message: 'You have been logged out',
-      duration: 2000,
-      position: 'bottom',
-      color: 'primary'
-    });
-    toast.present();
+    await this.logoutService.confirmAndLogout();
   }
 }

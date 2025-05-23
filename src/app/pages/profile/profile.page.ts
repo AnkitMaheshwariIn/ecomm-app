@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { LogoutService } from '../../services/logout.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
@@ -26,7 +27,8 @@ export class ProfilePage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private alertController: AlertController,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private logoutService: LogoutService
   ) {
     this.user$ = this.authService.user$;
     
@@ -48,23 +50,7 @@ export class ProfilePage implements OnInit {
   }
 
   async logout() {
-    const alert = await this.alertController.create({
-      header: this.languageService.translate('auth.logout'),
-      message: this.languageService.translate('auth.logoutConfirmation'),
-      buttons: [
-        {
-          text: this.languageService.translate('common.cancel'),
-          role: 'cancel'
-        },
-        {
-          text: this.languageService.translate('auth.logout'),
-          handler: async () => {
-            await this.authService.signOut();
-          }
-        }
-      ]
-    });
-    await alert.present();
+    await this.logoutService.confirmAndLogout();
   }
 
   goToAdminPanel() {

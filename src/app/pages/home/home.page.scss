@@ -1,17 +1,5 @@
-// Search Container
-.search-container {
-  padding: 10px 16px;
-  background-color: var(--ion-color-primary);
-  
-  ion-searchbar {
-    --background: #ffffff;
-    --border-radius: 8px;
-    --box-shadow: none;
-    --placeholder-color: var(--ion-color-medium);
-    --icon-color: var(--ion-color-medium);
-    margin: 0;
-  }
-}
+// Global searchbar styling is now handled by Ionic's default styling
+// which matches the categories page
 
 // Banner Slides
 .banner-container {
