@@ -1,47 +1,116 @@
 // Global searchbar styling is now handled by Ionic's default styling
 // which matches the categories page
 
-// Banner Slides
-.banner-container {
+// Banner Section Styling
+.banner-section {
+  margin-top: 12px;
   margin-bottom: 16px;
+  max-width: 100%;
+  padding: 0 8px;
+}
+
+// Mobile/Tablet Banner Styling
+.mobile-only {
+  display: block;
+  
+  @media (min-width: 992px) {
+    display: none; // Hide on larger screens
+  }
   
   .banner-slides {
     height: 180px;
+    
+    // Responsive height adjustments for tablets
+    @media (min-width: 768px) and (max-width: 991px) {
+      height: 220px;
+    }
+  }
+}
+
+// Desktop Banner Grid Styling
+.desktop-only {
+  display: none; // Hidden by default on mobile
+  
+  @media (min-width: 992px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr; // Two equal columns
+    gap: 10px;
+    height: auto; // Let height be determined by content
+  }
+}
+
+// Banner Slide Styling (shared between mobile and desktop)
+.banner-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--premium-shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--premium-shadow-lg);
   }
   
-  .banner-slide {
-    position: relative;
+  img {
     width: 100%;
     height: 100%;
-    border-radius: 8px;
-    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .banner-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
+    color: white;
+    text-align: left;
     
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    // Adjust padding for larger screens
+    @media (min-width: 768px) {
+      padding: 24px;
     }
     
-    .banner-content {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-      color: white;
-      text-align: left;
+    @media (min-width: 992px) {
+      padding: 32px;
+    }
+    
+    h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
       
-      h2 {
-        margin: 0 0 4px;
-        font-size: 18px;
-        font-weight: 700;
+      // Larger text for larger screens
+      @media (min-width: 768px) {
+        font-size: 24px;
+        margin: 0 0 8px;
       }
       
-      p {
-        margin: 0;
-        font-size: 14px;
-        opacity: 0.9;
+      @media (min-width: 992px) {
+        font-size: 28px;
+        margin: 0 0 10px;
+      }
+    }
+    
+    p {
+      margin: 0;
+      font-size: 14px;
+      opacity: 1;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      
+      // Larger text for larger screens
+      @media (min-width: 768px) {
+        font-size: 16px;
+      }
+      
+      @media (min-width: 992px) {
+        font-size: 18px;
       }
     }
   }

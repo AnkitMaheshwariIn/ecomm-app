@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" height="100%" viewBox="0 0 800 180" preserveAspectRatio="xMidYMid slice" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Special Offer</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="specialOfferGradient">
+            <stop stop-color="#7C4DFF" offset="0%"></stop>
+            <stop stop-color="#673AB7" offset="100%"></stop>
+        </linearGradient>
+        <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1"/>
+        </pattern>
+        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+            <rect width="100" height="100" fill="url(#smallGrid)"/>
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1"/>
+        </pattern>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="url(#specialOfferGradient)" x="0" y="0" width="1200" height="300" rx="12"></rect>
+        <rect fill="url(#grid)" x="0" y="0" width="1200" height="300" opacity="0.3"></rect>
+        
+        <!-- Decorative Elements -->
+        <circle fill="#9575CD" opacity="0.3" cx="200" cy="80" r="120"></circle>
+        <circle fill="#B39DDB" opacity="0.2" cx="1000" cy="220" r="160"></circle>
+        
+        <!-- Discount Icon (moved further right) -->
+        <g transform="translate(300.000000, 50.000000)">
+            <circle fill="#FF4081" cx="50" cy="50" r="40"></circle>
+            <text font-family="Arial-BoldMT, Arial" font-size="60" font-weight="bold" fill="#FFFFFF" text-anchor="middle">
+                <tspan x="50" y="70">%</tspan>
+            </text>
+        </g>
+        
+        <!-- Content (moved to far right) -->
+        <g transform="translate(400.000000, 40.000000)">
+            <text font-family="Arial-BoldMT, Arial" font-size="48" font-weight="bold" fill="#FFFFFF">
+                <tspan x="0" y="50">SPECIAL OFFER</tspan>
+            </text>
+            <text font-family="Arial, Arial" font-size="24" font-weight="normal" fill="#FFFFFF" opacity="0.8">
+                <tspan x="5" y="85">Up to 50% off on premium products</tspan>
+            </text>
+            <text font-family="Arial, Arial" font-size="18" font-weight="normal" fill="#FFFFFF" opacity="0.6">
+                <tspan x="5" y="120">Limited time offer. Shop now.</tspan>
+            </text>
+        </g>
+        
+        <!-- Decorative Patterns -->
+        <path d="M1120,40 L1160,40 L1160,80" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.6"></path>
+        <path d="M40,260 L80,260 L80,220" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.6"></path>
+        
+        <!-- Additional Decorative Elements for Larger Screens -->
+        <g opacity="0.4">
+            <circle fill="#FFFFFF" cx="900" cy="40" r="8"></circle>
+            <circle fill="#FFFFFF" cx="940" cy="40" r="8"></circle>
+            <circle fill="#FFFFFF" cx="980" cy="40" r="8"></circle>
+        </g>
+        
+        <path d="M700,240 C720,220 740,260 760,240 C780,220 800,260 820,240" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.3"></path>
+    </g>
+</svg>

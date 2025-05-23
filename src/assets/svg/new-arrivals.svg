@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" height="100%" viewBox="0 0 800 180" preserveAspectRatio="xMidYMid slice" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>New Arrivals</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="newArrivalsGradient">
+            <stop stop-color="#673AB7" offset="0%"></stop>
+            <stop stop-color="#512DA8" offset="100%"></stop>
+        </linearGradient>
+        <pattern id="diagonalHatch" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="10" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1"/>
+        </pattern>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="url(#newArrivalsGradient)" x="0" y="0" width="1200" height="300" rx="12"></rect>
+        <rect fill="url(#diagonalHatch)" x="0" y="0" width="1200" height="300" opacity="0.5"></rect>
+        
+        <!-- Decorative Elements -->
+        <circle fill="#9575CD" opacity="0.2" cx="1000" cy="80" r="120"></circle>
+        <circle fill="#B39DDB" opacity="0.1" cx="200" cy="220" r="160"></circle>
+        
+        <!-- New Tag (moved further right) -->
+        <g transform="translate(300.000000, 50.000000)">
+            <rect fill="#FF4081" x="0" y="0" width="100" height="60" rx="8" transform="rotate(-15 50 30)"></rect>
+            <text font-family="Arial-BoldMT, Arial" font-size="30" font-weight="bold" fill="#FFFFFF" text-anchor="middle" transform="rotate(-15 50 30)">
+                <tspan x="50" y="40">NEW</tspan>
+            </text>
+        </g>
+        
+        <!-- Content (moved to far right) -->
+        <g transform="translate(400.000000, 40.000000)">
+            <text font-family="Arial-BoldMT, Arial" font-size="48" font-weight="bold" fill="#FFFFFF">
+                <tspan x="0" y="50">NEW ARRIVALS</tspan>
+            </text>
+            <text font-family="Arial, Arial" font-size="24" font-weight="normal" fill="#FFFFFF" opacity="0.8">
+                <tspan x="5" y="85">Check out our latest collections</tspan>
+            </text>
+            <text font-family="Arial, Arial" font-size="18" font-weight="normal" fill="#FFFFFF" opacity="0.6">
+                <tspan x="5" y="120">Discover the season's hottest trends</tspan>
+            </text>
+        </g>
+        
+        <!-- Decorative Patterns -->
+        <path d="M1120,40 L1160,40 L1160,80" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.6"></path>
+        <path d="M40,260 L80,260 L80,220" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.6"></path>
+        
+        <!-- Small Plus Signs -->
+        <g opacity="0.4">
+            <path d="M300,30 L300,60 M285,45 L315,45" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"></path>
+            <path d="M700,260 L700,290 M685,275 L715,275" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"></path>
+            <path d="M1050,150 L1050,180 M1035,165 L1065,165" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"></path>
+        </g>
+        
+        <!-- Decorative Dots -->
+        <g opacity="0.3">
+            <circle fill="#FFFFFF" cx="400" cy="40" r="5"></circle>
+            <circle fill="#FFFFFF" cx="420" cy="40" r="5"></circle>
+            <circle fill="#FFFFFF" cx="440" cy="40" r="5"></circle>
+            <circle fill="#FFFFFF" cx="460" cy="40" r="5"></circle>
+            
+            <circle fill="#FFFFFF" cx="800" cy="260" r="5"></circle>
+            <circle fill="#FFFFFF" cx="820" cy="260" r="5"></circle>
+            <circle fill="#FFFFFF" cx="840" cy="260" r="5"></circle>
+            <circle fill="#FFFFFF" cx="860" cy="260" r="5"></circle>
+        </g>
+    </g>
+</svg>

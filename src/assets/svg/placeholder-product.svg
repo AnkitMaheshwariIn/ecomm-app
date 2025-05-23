@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Product Placeholder</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#EDE7F6" x="0" y="0" width="512" height="512"></rect>
+        <g transform="translate(128.000000, 128.000000)">
+            <rect stroke="#673AB7" stroke-width="8" x="4" y="4" width="248" height="248" rx="8"></rect>
+            <path d="M128,80 L168,152 L208,80 L208,208 L176,208 L176,144 L152,184 L104,184 L80,144 L80,208 L48,208 L48,80 L88,80 L128,152 L128,80 Z" fill="#673AB7"></path>
+            <circle fill="#7C4DFF" cx="224" cy="48" r="16"></circle>
+            <circle fill="#7C4DFF" cx="32" cy="224" r="16"></circle>
+        </g>
+    </g>
+</svg>

@@ -22,28 +22,49 @@
 
 <ion-content [fullscreen]="true">
 
-  <!-- Banner Slider -->
-  <div class="banner-container">
-    <ion-slides pager="true" [options]="slideOpts" class="banner-slides">
-      <ion-slide>
-        <div class="banner-slide">
-          <img src="assets/banners/banner1.jpg" alt="Special Offer">
-          <div class="banner-content">
-            <h2>{{ 'home.summerSale' | translate }}</h2>
-            <p>{{ 'home.upTo' | translate }} 50% {{ 'home.off' | translate }}</p>
+  <!-- Banner Section -->
+  <div class="banner-section">
+    <!-- Mobile Banner Slider (shows on small screens only) -->
+    <div class="banner-container mobile-only">
+      <ion-slides pager="true" [options]="slideOpts" class="banner-slides">
+        <ion-slide>
+          <div class="banner-slide">
+            <img src="assets/svg/special-offer.svg" alt="Special Offer">
+            <div class="banner-content">
+              <h2>{{ 'home.summerSale' | translate }}</h2>
+              <p>{{ 'home.upTo' | translate }} 50% {{ 'home.off' | translate }}</p>
+            </div>
           </div>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <div class="banner-slide">
-          <img src="assets/banners/banner2.jpg" alt="New Arrivals">
-          <div class="banner-content">
-            <h2>{{ 'home.newArrivalsPromo' | translate }}</h2>
-            <p>{{ 'home.checkOutLatest' | translate }}</p>
+        </ion-slide>
+        <ion-slide>
+          <div class="banner-slide">
+            <img src="assets/svg/new-arrivals.svg" alt="New Arrivals">
+            <div class="banner-content">
+              <h2>{{ 'home.newArrivalsPromo' | translate }}</h2>
+              <p>{{ 'home.checkOutLatest' | translate }}</p>
+            </div>
           </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+    
+    <!-- Desktop Banners (shows on large screens only) -->
+    <div class="banner-grid desktop-only">
+      <div class="banner-slide">
+        <img src="assets/svg/special-offer.svg" alt="Special Offer">
+        <div class="banner-content">
+          <h2>{{ 'home.summerSale' | translate }}</h2>
+          <p>{{ 'home.upTo' | translate }} 50% {{ 'home.off' | translate }}</p>
         </div>
-      </ion-slide>
-    </ion-slides>
+      </div>
+      <div class="banner-slide">
+        <img src="assets/svg/new-arrivals.svg" alt="New Arrivals">
+        <div class="banner-content">
+          <h2>{{ 'home.newArrivalsPromo' | translate }}</h2>
+          <p>{{ 'home.checkOutLatest' | translate }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Categories -->
@@ -59,7 +80,7 @@
       <ion-slide *ngFor="let category of categories$ | async">
         <div class="category-item" [routerLink]="['/category', category.id]">
           <div class="category-image">
-            <img [src]="category.imageUrl || 'assets/placeholder-image.jpg'" [alt]="category.name">
+            <img [src]="category.imageUrl || 'assets/svg/placeholder-category.svg'" [alt]="category.name">
           </div>
           <p>{{ category.name }}</p>
         </div>
@@ -79,7 +100,7 @@
     <div class="product-grid">
       <div class="product-card" *ngFor="let product of featuredProducts$ | async">
         <div class="product-image" [routerLink]="['/product', product.id]">
-          <img [src]="product.images[0] || 'assets/placeholder-product.jpg'" [alt]="product.name">
+          <img [src]="product.images[0] || 'assets/svg/placeholder-product.svg'" [alt]="product.name">
           <div class="discount-badge" *ngIf="product.salePrice">
             {{ ((product.price - product.salePrice) / product.price * 100) | number:'1.0-0' }}% OFF
           </div>
@@ -114,7 +135,7 @@
     <div class="product-grid">
       <div class="product-card" *ngFor="let product of featuredProducts$ | async">
         <div class="product-image" [routerLink]="['/product', product.id]">
-          <img [src]="product.images[0] || 'assets/placeholder-product.jpg'" [alt]="product.name">
+          <img [src]="product.images[0] || 'assets/svg/placeholder-product.svg'" [alt]="product.name">
           <div class="discount-badge" *ngIf="product.salePrice">
             {{ ((product.price - product.salePrice) / product.price * 100) | number:'1.0-0' }}% OFF
           </div>
