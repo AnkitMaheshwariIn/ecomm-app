@@ -1,0 +1,45 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  },
+  "auth": {
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Sign Up",
+    "forgotPassword": "Forgot Password",
+    "logoutConfirmation": "Are you sure you want to logout?",
+    "loginSuccess": "Login successful",
+    "loginFailed": "Login failed",
+    "logoutSuccess": "Logout successful"
+  },
+  "login": {
+    "tagline": "Your one-stop shopping destination",
+    "googleSignIn": "Sign in with Google",
+    "termsAgreement": "By signing in, you agree to our Terms of Service and Privacy Policy."
+  },
+  "profile": {
+    "title": "My Profile",
+    "orders": "My Orders",
+    "wishlist": "Wishlist",
+    "addresses": "Addresses",
+    "paymentMethods": "Payment Methods",
+    "settings": "Settings",
+    "helpSupport": "Help & Support",
+    "adminPanel": "Admin Panel",
+    "admin": "Admin",
+    "version": "Version"
+  },
+  "tabs": {
+    "home": "Home",
+    "categories": "Categories",
+    "cart": "Cart",
+    "profile": "Profile"
+  }
+}

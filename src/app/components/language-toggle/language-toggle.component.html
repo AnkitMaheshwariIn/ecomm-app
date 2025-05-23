@@ -1,0 +1,4 @@
+<ion-button fill="clear" (click)="toggleLanguage()">
+  <ion-icon slot="start" name="language"></ion-icon>
+  <span>{{ (currentLang$ | async) === 'en' ? 'हिंदी' : 'English' }}</span>
+</ion-button>

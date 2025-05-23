@@ -1,18 +1,21 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { LoadingController, ToastController, IonContent, IonButton, IonHeader, IonToolbar, IonTitle, IonIcon } from '@ionic/angular/standalone';
+import { LoadingController, ToastController, IonContent, IonButton, IonHeader, IonToolbar, IonTitle, IonIcon, IonButtons } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { logoGoogle } from 'ionicons/icons';
+import { logoGoogle, languageOutline } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LanguageService } from '../../services/language.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+import { LanguageToggleComponent } from '../../components/language-toggle/language-toggle.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonContent, IonButton, IonHeader, IonToolbar, IonTitle, IonIcon]
+  imports: [CommonModule, FormsModule, IonContent, IonButton, IonHeader, IonToolbar, IonTitle, IonIcon, IonButtons, TranslatePipe, LanguageToggleComponent]
 })
 export class LoginPage implements OnInit {
 
@@ -21,11 +24,13 @@ export class LoginPage implements OnInit {
   private router = inject(Router);
   private loadingController = inject(LoadingController);
   private toastController = inject(ToastController);
+  private languageService = inject(LanguageService);
 
   constructor() {
     // Add Ionic icons
     addIcons({
-      'logo-google': logoGoogle
+      'logo-google': logoGoogle,
+      'language-outline': languageOutline
     });
   }
 

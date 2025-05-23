@@ -1,0 +1,45 @@
+{
+  "common": {
+    "cancel": "रद्द करें",
+    "ok": "ठीक है",
+    "yes": "हां",
+    "no": "नहीं",
+    "save": "सहेजें",
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "close": "बंद करें"
+  },
+  "auth": {
+    "logout": "लॉगआउट",
+    "login": "लॉगिन",
+    "signup": "साइन अप",
+    "forgotPassword": "पासवर्ड भूल गए",
+    "logoutConfirmation": "क्या आप वाकई लॉगआउट करना चाहते हैं?",
+    "loginSuccess": "लॉगिन सफल",
+    "loginFailed": "लॉगिन विफल",
+    "logoutSuccess": "लॉगआउट सफल"
+  },
+  "login": {
+    "tagline": "आपका एक-स्टॉप शॉपिंग डेस्टिनेशन",
+    "googleSignIn": "Google के साथ साइन इन करें",
+    "termsAgreement": "साइन इन करके, आप हमारी सेवा की शर्तों और गोपनीयता नीति से सहमत होते हैं।"
+  },
+  "profile": {
+    "title": "मेरी प्रोफाइल",
+    "orders": "मेरे ऑर्डर",
+    "wishlist": "विशलिस्ट",
+    "addresses": "पते",
+    "paymentMethods": "भुगतान विधियां",
+    "settings": "सेटिंग्स",
+    "helpSupport": "सहायता और समर्थन",
+    "adminPanel": "एडमिन पैनल",
+    "admin": "एडमिन",
+    "version": "वर्शन"
+  },
+  "tabs": {
+    "home": "होम",
+    "categories": "कैटेगरी",
+    "cart": "कार्ट",
+    "profile": "प्रोफाइल"
+  }
+}

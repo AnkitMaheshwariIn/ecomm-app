@@ -1,8 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>
-      Login
+      {{ 'auth.login' | translate }}
     </ion-title>
+    <ion-buttons slot="end">
+      <app-language-toggle></app-language-toggle>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,18 +14,18 @@
     <div class="logo-container">
       <img src="assets/icon/app-logo.png" alt="App Logo" class="app-logo">
       <h1>ShopEase</h1>
-      <p>Your one-stop shopping destination</p>
+      <p>{{ 'login.tagline' | translate }}</p>
     </div>
 
     <div class="login-buttons">
       <ion-button expand="block" (click)="googleLogin()" class="google-btn">
         <ion-icon slot="start" name="logo-google"></ion-icon>
-        Sign in with Google
+        {{ 'login.googleSignIn' | translate }}
       </ion-button>
     </div>
 
     <div class="footer-text">
-      <p>By signing in, you agree to our Terms of Service and Privacy Policy.</p>
+      <p>{{ 'login.termsAgreement' | translate }}</p>
     </div>
   </div>
 </ion-content>

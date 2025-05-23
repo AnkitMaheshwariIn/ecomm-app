@@ -1,0 +1,21 @@
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--ion-color-primary);
+  color: var(--ion-color-primary);
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba(var(--ion-color-primary-rgb), 0.1);
+  }
+  
+  ion-icon {
+    font-size: 18px;
+  }
+}

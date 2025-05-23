@@ -6,15 +6,18 @@ import { User } from '../../models/user.model';
 import { AlertController, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonCard, IonCardHeader, IonCardContent, IonAvatar, IonItem, IonLabel, IonIcon, IonButton, IonList, IonBadge } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { logOutOutline, settingsOutline, cardOutline, helpCircleOutline, personOutline, shieldOutline } from 'ionicons/icons';
+import { logOutOutline, settingsOutline, cardOutline, helpCircleOutline, personOutline, shieldOutline, cartOutline, heartOutline, locationOutline } from 'ionicons/icons';
 import { AdminManagerComponent } from './admin-manager/admin-manager.component';
+import { LanguageService } from '../../services/language.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+import { LanguageToggleComponent } from '../../components/language-toggle/language-toggle.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonCard, IonCardHeader, IonCardContent, IonAvatar, IonItem, IonLabel, IonIcon, IonButton, IonList, IonBadge, AdminManagerComponent]
+  imports: [CommonModule, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonCard, IonCardHeader, IonCardContent, IonAvatar, IonItem, IonLabel, IonIcon, IonButton, IonList, IonBadge, AdminManagerComponent, TranslatePipe, LanguageToggleComponent]
 })
 export class ProfilePage implements OnInit {
   user$: Observable<User | null | undefined>;
@@ -22,7 +25,8 @@ export class ProfilePage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private languageService: LanguageService
   ) {
     this.user$ = this.authService.user$;
     
@@ -33,7 +37,10 @@ export class ProfilePage implements OnInit {
       'card-outline': cardOutline,
       'help-circle-outline': helpCircleOutline,
       'person-outline': personOutline,
-      'shield-outline': shieldOutline
+      'shield-outline': shieldOutline,
+      'cart-outline': cartOutline,
+      'heart-outline': heartOutline,
+      'location-outline': locationOutline
     });
   }
 
@@ -42,15 +49,15 @@ export class ProfilePage implements OnInit {
 
   async logout() {
     const alert = await this.alertController.create({
-      header: 'Logout',
-      message: 'Are you sure you want to logout?',
+      header: this.languageService.translate('auth.logout'),
+      message: this.languageService.translate('auth.logoutConfirmation'),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.languageService.translate('common.cancel'),
           role: 'cancel'
         },
         {
-          text: 'Logout',
+          text: this.languageService.translate('auth.logout'),
           handler: async () => {
             await this.authService.signOut();
           }

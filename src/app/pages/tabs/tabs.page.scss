@@ -22,7 +22,7 @@ ion-tab-button {
 .logout-button {
   position: fixed;
   top: 10px;
-  right: 10px;
+  left: 10px; /* Changed from right to left to avoid overlap */
   z-index: 1000;
   --padding-start: 8px;
   --padding-end: 8px;

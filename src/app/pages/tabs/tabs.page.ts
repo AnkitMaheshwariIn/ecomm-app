@@ -23,6 +23,9 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { homeOutline, gridOutline, cartOutline, personOutline, logOutOutline, closeOutline } from 'ionicons/icons';
+import { LanguageService } from '../../services/language.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+import { LanguageToggleComponent } from '../../components/language-toggle/language-toggle.component';
 
 @Component({
   selector: 'app-tabs',
@@ -44,7 +47,9 @@ import { homeOutline, gridOutline, cartOutline, personOutline, logOutOutline, cl
     IonTitle,
     IonToolbar,
     IonButtons,
-    IonFooter
+    IonFooter,
+    TranslatePipe,
+    LanguageToggleComponent
   ]
 })
 export class TabsPage implements OnInit {
@@ -54,7 +59,8 @@ export class TabsPage implements OnInit {
   constructor(
     private authService: AuthService,
     private cartService: CartService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private languageService: LanguageService
   ) {
     this.user$ = this.authService.user$;
     this.cartItemCount$ = this.cartService.cartItemCount;
@@ -72,15 +78,15 @@ export class TabsPage implements OnInit {
   
   async showLogoutConfirmation() {
     const alert = await this.alertController.create({
-      header: 'Logout',
-      message: 'Are you sure you want to logout?',
+      header: this.languageService.translate('auth.logout'),
+      message: this.languageService.translate('auth.logoutConfirmation'),
       buttons: [
         {
-          text: 'Cancel',
+          text: this.languageService.translate('common.cancel'),
           role: 'cancel',
           cssClass: 'secondary'
         }, {
-          text: 'Logout',
+          text: this.languageService.translate('auth.logout'),
           handler: () => {
             this.logout();
           }
