@@ -212,9 +212,10 @@ To add a new language:
 - **Internationalization**: Keep all user-facing text in translation files
 - **Service Abstraction**: Use services for shared functionality (e.g., LogoutService)
 
-## License
+## 🔒 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is proprietary and confidential. Unauthorized use or distribution is strictly prohibited.  
+For licensing requests, contact **Ankit Maheshwari**.
 
 ## Acknowledgements
 
